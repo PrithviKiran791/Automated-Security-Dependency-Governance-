@@ -1,0 +1,29 @@
+name: Confidence Suite
+on: [pull_request]
+
+jobs:
+  validate-and-scan:
+    runs-on: ubuntu-latest
+    steps:
+      # Pinning to SHA for Supply Chain Security
+      - name: Checkout Code
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@39225597fd66c3c93c6bbf9bb6565fe9d011c82e # v4.1.0
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: 🛡️ Security Scan (Trivy)
+        # Using v0.34.0+ to avoid the Feb 2026 Script Injection vulnerability
+        uses: aquasecurity/trivy-action@18f251a55c1a7da293d23b9165b463df2b3c3e9a # v0.34.0
+        with:
+          scan-type: 'fs'
+          exit-code: '1' # Fails the build if vulnerabilities are found
+          severity: 'CRITICAL,HIGH'
+
+      - name: 🧪 Run Logic Tests (Jest)
+        run: npm test
