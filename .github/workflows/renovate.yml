@@ -13,8 +13,9 @@ jobs:
       
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v40.1.11
+        # Pass the repository name as an Environment Variable instead
+        env:
+          RENOVATE_REPOSITORIES: ${{ github.repository }}
         with:
           configurationFile: renovate.json
           token: ${{ secrets.RENOVATE_TOKEN }}
-          # THIS LINE FIXES THE "NO REPOS FOUND" ERROR:
-          renovate_repositories: ${{ github.repository }}
