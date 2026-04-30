@@ -6,6 +6,15 @@ Target Environment: GitHub Actions, Node.js
 
 Presentation Deadline: May 2026
 
+## Table of Contents
+
+- [1. Project Overview](#1-project-overview)
+- [2. System Architecture](#2-system-architecture)
+- [3. Repository Configuration & Secrets](#3-repository-configuration--secrets)
+- [4. Contribution Guidelines](#4-contribution-guidelines)
+- [5. Presentation Strategy (May Demo)](#5-presentation-strategy-may-demo)
+- [6. Testing & Local Runs](#6-testing--local-runs)
+
 ## 1. Project Overview
 
 Welcome to the Automated Security Dependency Governance project. As modern software relies heavily on open-source packages, a vulnerable dependency can compromise an entire system. Manually tracking and updating these packages is inefficient and error-prone.
@@ -29,14 +38,25 @@ The pipeline consists of four primary pillars working in sequence:
 
 This repository demonstrates hosting the Renovate engine within GitHub Actions rather than using the Marketplace app. This provides finer control and illustrates infrastructure-as-code principles.
 
-- The pipeline uses a repository secret named `RENOVATE_TOKEN`. This PAT belongs to the repository owner and acts as a service account for the bot. In corporate setups, replace this with a dedicated machine user.
-- Important: PRs authored by the bot will appear as authored by the PAT owner. That's expected for this demo.
+Key configuration notes:
+
+1. Renovate configuration: see [confidence-suite/renovate.json](confidence-suite/renovate.json#L1) for the current rules (automerge for minor/patch, dependency dashboard enabled).
+2. Repository secret: `RENOVATE_TOKEN` — a personal access token (PAT) used by the self-hosted Renovate runner to create PRs and comment on issues. In production, use a dedicated machine/service account instead of a personal user token.
+3. Workflow files: the runner and CI are implemented as GitHub Actions workflows (expected at `.github/workflows/renovate.yml` and `.github/workflows/ci.yml`). If you don't see them in the repo, they should be added to enable automation.
+
+Security reminders:
+
+- Keep `RENOVATE_TOKEN` scoped narrowly (repo:status, repo_deployment, public_repo or as required) and rotate it regularly.
+- PRs created by the bot will be authored by the account that owns the PAT. This is normal for demos; use a machine user for multi-operator environments.
 
 ### Key Files to Understand
 
-- `renovate.json` — The brain. Configures Renovate behavior, allowed update types, and dashboard settings.
-- `.github/workflows/renovate.yml` — The engine. Cron/job running the Renovate Docker image; configured to scan this repo.
-- `.github/workflows/ci.yml` — The Confidence Suite. Runs Trivy and Jest when PRs are opened.
+- [confidence-suite/renovate.json](confidence-suite/renovate.json#L1) — The brain. Configures Renovate behavior, allowed update types, and dashboard settings.
+- `package.json` — The target application's dependency manifest. See [confidence-suite/package.json](confidence-suite/package.json#L1).
+- `.github/workflows/renovate.yml` — The engine (expected). Cron/job running the Renovate Docker image; configured to scan this repo.
+- `.github/workflows/ci.yml` — The Confidence Suite (expected). Runs Trivy and Jest when PRs are opened.
+
+If you want, I can scaffold `renovate.yml` and `ci.yml` workflows in `.github/workflows/` for this repo.
 
 ## 4. Contribution Guidelines
 
@@ -77,3 +97,26 @@ If the remote already exists, update the remote URL or push to the appropriate r
 ---
 
 If you'd like, I can commit and attempt to push this README to the repository now from this environment. Let me know and I'll proceed to commit and push.
+
+## 6. Testing & Local Runs
+
+Run unit tests and local security scans before relying on the CI pipeline. Example commands:
+
+```powershell
+cd "c:\Users\prith\Desktop\My Projects\Devops_Project\confidence-suite"
+npm install
+npm test        # runs Jest
+```
+
+Install Trivy and scan the workspace (Windows example using PowerShell):
+
+```powershell
+# Install Trivy (if not already installed) — follow Trivy docs for Windows install
+trivy fs --exit-code 1 --severity HIGH,CRITICAL .
+```
+
+CI note: The `ci.yml` workflow should run `trivy fs` and `npm test` and only allow merge when both succeed.
+
+---
+
+Next step options: scaffold missing workflows, run the Confidence Suite in CI, or make more README edits.
