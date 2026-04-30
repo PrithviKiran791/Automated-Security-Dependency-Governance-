@@ -1,8 +1,8 @@
 name: Renovate Bot Runner
 on:
-  workflow_dispatch: # This adds the "Run" button for your live demo!
+  workflow_dispatch:
   schedule:
-    - cron: '0 * * * *' # This tells the bot to check for updates every hour
+    - cron: '0 * * * *'
 
 jobs:
   renovate:
@@ -16,3 +16,5 @@ jobs:
         with:
           configurationFile: renovate.json
           token: ${{ secrets.RENOVATE_TOKEN }}
+          # THIS LINE FIXES THE "NO REPOS FOUND" ERROR:
+          renovate_repositories: ${{ github.repository }}
