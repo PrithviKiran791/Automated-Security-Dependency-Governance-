@@ -1,8 +1,8 @@
 # 🛡️ Automated Security Dependency Governance
 
-![Build Status](https://github.com/PrithviKiran791/Automated-Security-Dependency-Governance-/actions/workflows/ci.yml/badge.svg)
-![Security Scan](https://github.com/PrithviKiran791/Automated-Security-Dependency-Governance-/actions/workflows/renovate.yml/badge.svg)
-![License](https://img.shields.io/github/license/PrithviKiran791/Automated-Security-Dependency-Governance-)
+![CI Tests](https://github.com/PrithviKiran791/Automated-Security-Dependency-Governance-/actions/workflows/ci.yml/badge.svg)
+![Security Pipeline](https://github.com/PrithviKiran791/Automated-Security-Dependency-Governance-/actions/workflows/renovate.yml/badge.svg)
+![Security Verified](https://img.shields.io/badge/Security-Trivy_Protected-green?style=for-the-badge&logo=github)
 
 Prepared for: Project Teammates & Contributors
 

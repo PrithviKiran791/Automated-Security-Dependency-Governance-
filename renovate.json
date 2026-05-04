@@ -1,19 +1,13 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended", ":dependencyDashboard"],
+  "extends": ["config:recommended"],
   "dependencyDashboard": true,
   "onboarding": false,
-  "rebaseWhen": "behind-base-branch",
   "packageRules": [
     {
-      "matchUpdateTypes": ["minor", "patch"],
-      "automerge": true,
-      "automergeType": "branch"
-    },
-    {
       "matchPackageNames": ["lodash"],
-      "schedule": ["at any time"]
+      "allowedVersions": "4.17.21",
+      "automerge": true
     }
-  ],
-  "platformAutomerge": true
+  ]
 }
