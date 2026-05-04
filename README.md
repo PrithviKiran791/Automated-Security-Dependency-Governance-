@@ -1,4 +1,8 @@
-# Automated Security & Dependency Governance
+# 🛡️ Automated Security Dependency Governance
+
+![Build Status](https://github.com/PrithviKiran791/Automated-Security-Dependency-Governance-/actions/workflows/ci.yml/badge.svg)
+![Security Scan](https://github.com/PrithviKiran791/Automated-Security-Dependency-Governance-/actions/workflows/renovate.yml/badge.svg)
+![License](https://img.shields.io/github/license/PrithviKiran791/Automated-Security-Dependency-Governance-)
 
 Prepared for: Project Teammates & Contributors
 

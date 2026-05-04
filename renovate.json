@@ -3,11 +3,16 @@
   "extends": ["config:recommended", ":dependencyDashboard"],
   "dependencyDashboard": true,
   "onboarding": false,
+  "rebaseWhen": "behind-base-branch",
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch"],
       "automerge": true,
       "automergeType": "branch"
+    },
+    {
+      "matchPackageNames": ["lodash"],
+      "schedule": ["at any time"]
     }
   ],
   "platformAutomerge": true

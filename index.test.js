@@ -1,4 +1,4 @@
-const secureMerge = require('./index');
+const secureMerge = require('./indes');
 
 test('Properly merges two objects', () => {
     const obj1 = { a: 1 };
