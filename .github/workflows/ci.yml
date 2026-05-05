@@ -12,7 +12,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@39225597fd66c3c93c6bbf9bb6565fe9d011c82e # v4.1.0
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: Install Dependencies
         run: npm install
