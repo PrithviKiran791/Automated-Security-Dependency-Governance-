@@ -19,7 +19,7 @@ jobs:
 
       - name: 🛡️ Security Scan (Trivy)
         # Using v0.34.0+ to avoid the Feb 2026 Script Injection vulnerability
-        uses: aquasecurity/trivy-action@18f251a55c1a7da293d23b9165b463df2b3c3e9a # v0.34.0
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
         with:
           scan-type: 'fs'
           scan-ref: '.'
