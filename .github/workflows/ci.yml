@@ -7,7 +7,7 @@ jobs:
     steps:
       # Pinning to SHA for Supply Chain Security
       - name: Checkout Code
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       
       - name: Setup Node.js
         uses: actions/setup-node@39225597fd66c3c93c6bbf9bb6565fe9d011c82e # v4.1.0
